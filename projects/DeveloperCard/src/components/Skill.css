@@ -1,0 +1,15 @@
+.skill {
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 15px;
+}
+
+.skill p {
+  display: inline-block;
+}
+
+.skill span {
+  display: inline-block;
+}
