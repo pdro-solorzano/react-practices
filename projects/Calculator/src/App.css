@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: ubuntu;
+}
+
+.calculator-container {
+  background-color: #525558;
+  width: 500px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 15px;
+}
+
+.display {
+  background-color: black;
+  font-size: 35px;
+  font-weight: bold;
+  text-align: end;
+  width: 100%;
+}
+
+.display span {
+  font-size: 80px;
+  font-weight: bold;
+  text-align: end;
+  padding: 10px;
+}
+
+.button-container {
+  margin-top: 15px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 5px;
+}
+
+.button {
+  font-size: 25px;
+  font-weight: bold;
+  padding: 25px 20px;
+  border-radius: 8px;
+  border: 3px solid transparent;
+}
+
+.button:hover {
+  background-color: #919191;
+}
+
+.button:active {
+  background-color: #535353;
+  border: solid 3px #424141;
+}
+
+.equal-button {
+  background-color: #ffa43a;
+  grid-row-start: 4;
+  grid-row-end: 6;
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+.equal-button:hover {
+  background-color: #fab260;
+}
+
+.equal-button:active {
+  background-color: #dd7e11;
+  border: solid 3px #a85e09;
+}
+
+.action-button {
+  background-color: #759eff;
+}
+
+.action-button:hover {
+  background-color: #9ab8ff;
+}
+
+.action-button:active {
+  background-color: #2e5cc5;
+  border: solid 3px #193b8b;
+}
