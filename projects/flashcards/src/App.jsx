@@ -4,21 +4,13 @@ import "./App.css";
 import { questions } from "./data";
 
 function App() {
-  const [showingAnswer, setShowingAnswer] = useState({
-    questionId: 0,
-    showing: false,
-  });
+  const [showingAnswer, setShowingAnswer] = useState(null);
 
   function handleClick(question) {
-    if (question.id === showingAnswer.questionId) {
-      setShowingAnswer({ questionId: 0, showing: false });
+    if (question.id === showingAnswer) {
+      setShowingAnswer(null);
     } else {
-      let newShowingAnswer = {
-        ...showingAnswer,
-        questionId: question.id,
-        showing: true,
-      };
-      setShowingAnswer(newShowingAnswer);
+      setShowingAnswer(question.id);
     }
   }
 
@@ -44,28 +36,11 @@ function Flashcard({ question, showingAnswer, clickHandler }) {
       className="flashcard"
       onClick={clickHandler}
       style={
-        showingAnswer.showing && showingAnswer.questionId === question.id
-          ? { backgroundColor: "orangered" }
-          : {}
+        showingAnswer === question.id ? { backgroundColor: "orangered" } : {}
       }
     >
-      <span
-        className={`question ${
-          showingAnswer.showing && showingAnswer.questionId === question.id
-            ? "hide"
-            : "show"
-        }`}
-      >
-        {question.question}
-      </span>
-      <span
-        className={`answer ${
-          showingAnswer.showing && showingAnswer.questionId === question.id
-            ? "show"
-            : "hide"
-        }`}
-      >
-        {question.answer}
+      <span>
+        {showingAnswer === question.id ? question.answer : question.question}
       </span>
     </div>
   );
