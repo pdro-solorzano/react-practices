@@ -3,10 +3,16 @@ import "./App.css";
 
 function App() {
   const [multiplier, setMultiplier] = useState(1);
-  const [days, setDays] = useState(1);
+  const [days, setDays] = useState(0);
 
   const date = new Date();
   date.setDate(date.getDate() + days);
+
+  function handleReset() {
+    if (multiplier == 1 && days === 0) return;
+    setMultiplier(1);
+    setDays(0);
+  }
 
   return (
     <div className="app">
@@ -21,8 +27,15 @@ function App() {
         onChangeHandler={setDays}
       />
       <p className="message">
-        {days} days from today is {date.toUTCString()}
+        {`${
+          days === 0
+            ? `Today is ${date.toDateString()}`
+            : `${days} from today is ${date.toDateString()}`
+        }`}
       </p>
+      <button className="reset" onClick={handleReset}>
+        Reset
+      </button>
     </div>
   );
 }
@@ -33,7 +46,7 @@ function DaysContainer({ days, multiplier, onChangeHandler }) {
       <button
         className="minus"
         onClick={() => {
-          if (days <= 1 || days - multiplier <= 0) return;
+          if (days < 0 || days - multiplier < 0) return;
           onChangeHandler(Number(days) - Number(multiplier));
         }}
       >
