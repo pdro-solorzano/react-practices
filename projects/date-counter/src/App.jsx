@@ -9,7 +9,6 @@ function App() {
   date.setDate(date.getDate() + days);
 
   function handleReset() {
-    if (multiplier == 1 && days === 0) return;
     setMultiplier(1);
     setDays(0);
   }
@@ -33,9 +32,11 @@ function App() {
             : `${days} from today is ${date.toDateString()}`
         }`}
       </p>
-      <button className="reset" onClick={handleReset}>
-        Reset
-      </button>
+      {days > 0 || multiplier > 1 ? (
+        <button className="reset" onClick={handleReset}>
+          Reset
+        </button>
+      ) : null}
     </div>
   );
 }
@@ -46,7 +47,6 @@ function DaysContainer({ days, multiplier, onChangeHandler }) {
       <button
         className="minus"
         onClick={() => {
-          if (days < 0 || days - multiplier < 0) return;
           onChangeHandler(Number(days) - Number(multiplier));
         }}
       >
