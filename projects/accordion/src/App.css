@@ -1,0 +1,66 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: ubuntu;
+}
+
+.app {
+  width: 85%;
+  margin: 25px auto;
+}
+
+.accordion {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  border: 2px solid gray;
+  box-shadow: 5px 5px 5px gray;
+}
+
+.active {
+  color: green !important;
+}
+
+.border-active {
+  border-top: 4px solid green;
+}
+
+.accordion-header {
+  cursor: pointer;
+  width: 100%;
+  padding: 10px 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.accordion-header .title,
+.accordion-header .number {
+  font-size: 2rem;
+  text-align: start;
+}
+
+.accordion-header .number {
+  color: #888;
+}
+
+.accordion-header .icon {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.accordion-body {
+  width: 65%;
+  margin: 0 auto;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: justify;
+  padding: 10px;
+  margin-top: 10px;
+  display: none;
+}
