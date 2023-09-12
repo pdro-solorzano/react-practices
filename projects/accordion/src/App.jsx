@@ -18,10 +18,26 @@ const accordions = [
 ];
 
 function App() {
+  const [isOpen, setIsOpen] = useState(null);
+
+  function onOpenAccordion(index) {
+    if (index === isOpen) {
+      setIsOpen(null);
+    } else {
+      setIsOpen(index);
+    }
+  }
+
   return (
     <div className="app">
       {accordions.map((el, index) => (
-        <Accordion key={index} title={el.title} index={index + 1}>
+        <Accordion
+          key={index}
+          title={el.title}
+          index={index + 1}
+          isOpen={index === isOpen}
+          onOpenAccordion={onOpenAccordion}
+        >
           {el.body}
         </Accordion>
       ))}

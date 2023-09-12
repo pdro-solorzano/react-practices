@@ -1,11 +1,8 @@
-import { useState } from "react";
-
-function Accordion({ index, title, children }) {
-  const [isOpen, setIsOpen] = useState(false);
+function Accordion({ index, title, children, isOpen, onOpenAccordion }) {
   let number = String(index).padStart(2, "0");
 
   function handleClick() {
-    setIsOpen((actual) => !actual);
+    onOpenAccordion(index - 1);
   }
 
   return (
