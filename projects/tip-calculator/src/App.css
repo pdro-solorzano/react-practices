@@ -1,0 +1,36 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app {
+  width: 85%;
+  margin: 35px auto;
+  border: 3px black solid;
+  padding: 25px 10px;
+  box-shadow: 5px 5px 10px;
+}
+
+form {
+  margin-top: 30px;
+  font-size: 25px;
+  font-weight: 300;
+}
+
+input,
+select {
+  font-size: 20px;
+  padding: 5px;
+  width: 100%;
+}
+
+section {
+  margin-top: 30px;
+}
+
+span {
+  font-size: 30px;
+  font-weight: bold;
+}
