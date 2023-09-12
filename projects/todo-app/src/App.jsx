@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { TodoCreator } from "./components/TodoCreator";
 import { TodoItem } from "./components/TodoItem";
 import { TodoList } from "./components/TodoList";
 import { TodoSection } from "./components/TodoSection";
 
-const data = [{ id: 1, description: "Hello I am a todo", completed: false }];
-
 function App() {
-  const [todos, setTodos] = useState(data);
+  const [todos, setTodos] = useState(() => {
+    let todosFromLocalStorage = JSON.parse(localStorage.getItem("todos-app"));
+    return todosFromLocalStorage ? todosFromLocalStorage : [];
+  });
   const [section, setSection] = useState("All");
+
+  useEffect(() => {
+    let todosString = JSON.stringify(todos);
+    localStorage.setItem("todos-app", todosString);
+  }, [todos]);
 
   let filteredTodos;
   if (section === "All") {
