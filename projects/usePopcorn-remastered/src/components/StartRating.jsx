@@ -2,10 +2,13 @@ import { useState } from "react";
 import PropTypes, { number } from "prop-types";
 
 StartRating.propTypes = {
-  maxRating: PropTypes.number.isRequired,
+  maxRating: PropTypes.number,
   color: PropTypes.string,
   size: PropTypes.number,
-  className: PropTypes.object,
+  className: PropTypes.string,
+  messages: PropTypes.array,
+  defaultRating: PropTypes.number,
+  onSetRating: PropTypes.func,
 };
 
 function StartRating({
