@@ -67,6 +67,7 @@ function App() {
       <section className="splitbill-section">
         {friendSplitting && (
           <SplitBill
+            key={friendSplitting}
             onSplitBill={onSplitBill}
             friendName={friendSplitting}
             closeSplittingView={closeSplittingView}
