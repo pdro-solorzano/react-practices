@@ -62,8 +62,23 @@ function TabContent({ item }) {
   const [showDetails, setShowDetails] = useState(true);
   const [likes, setLikes] = useState(0);
 
+  const handleUndo = () => {
+    setLikes(0);
+    setShowDetails(true);
+  };
+
   function handleInc() {
     setLikes(likes + 1);
+  }
+
+  function handleSuperInc() {
+    setLikes((current) => current + 1);
+    setLikes((current) => current + 1);
+    setLikes((current) => current + 1);
+  }
+
+  function handleUndoTimeout() {
+    setTimeout(() => handleUndo(), 2000);
   }
 
   return (
@@ -79,13 +94,13 @@ function TabContent({ item }) {
         <div className="hearts-counter">
           <span>{likes} ❤️</span>
           <button onClick={handleInc}>+</button>
-          <button>+++</button>
+          <button onClick={handleSuperInc}>+++</button>
         </div>
       </div>
 
       <div className="tab-undo">
-        <button>Undo</button>
-        <button>Undo in 2s</button>
+        <button onClick={handleUndo}>Undo</button>
+        <button onClick={handleUndoTimeout}>Undo in 2s</button>
       </div>
     </div>
   );
