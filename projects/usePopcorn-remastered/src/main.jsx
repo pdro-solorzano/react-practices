@@ -21,13 +21,15 @@ function TestStars() {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <StartRating maxRating={5} />
+    {/* <StartRating maxRating={5} />
     <StartRating
       size={24}
       color="red"
       messages={["Terrible", "Bad", "Okay", "Good", "Amazing"]}
       defaultRating={1}
     />
-    <TestStars />
+    <TestStars /> */}
+
+    <App />
   </React.StrictMode>
 );
