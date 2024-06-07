@@ -15,12 +15,26 @@ const calculateWinner = (opt1, opt2) => {
     return "You lose 😔";
   }
 };
+const getPlaysHistory = () => {
+  let localPlaysHistory = localStorage.getItem("playsHistory");
+  if (localPlaysHistory === null) {
+    localPlaysHistory = `{
+      "wins" : 0,
+      "loses" : 0,
+      "draws" : 0
+    }`;
+
+    localStorage.setItem("playsHistory", localPlaysHistory);
+  }
+  return JSON.parse(localPlaysHistory);
+};
 
 function App() {
   const [version, setVersion] = useState("");
   const [userOption, setUserOption] = useState("");
   const [cpuOption, setCpuOption] = useState("");
   const [counter, setCounter] = useState();
+  const [playsHistory, setPlaysHistory] = useState(getPlaysHistory());
 
   useEffect(() => {
     if (counter <= 3 && counter > 0) {
@@ -36,6 +50,28 @@ function App() {
       }
     }; */
   }, [counter]);
+
+  useEffect(() => {
+    if (counter === 0) {
+      // Update playsHistory state and update the localStorage variable
+      if (calculateWinner(userOption, cpuOption) === "You won! 🎉") {
+        const history = { ...playsHistory, wins: playsHistory.wins + 1 };
+        setPlaysHistory(history);
+        localStorage.setItem("playsHistory", JSON.stringify(history));
+      } else if (calculateWinner(userOption, cpuOption) === "You lose 😔") {
+        const history = { ...playsHistory, loses: playsHistory.loses + 1 };
+        localStorage.setItem("playsHistory", JSON.stringify(history));
+        setPlaysHistory(history);
+      } else {
+        const history = { ...playsHistory, draws: playsHistory.draws + 1 };
+        localStorage.setItem("playsHistory", JSON.stringify(history));
+        setPlaysHistory(history);
+      }
+      setCounter();
+      console.log(playsHistory);
+      console.log(JSON.parse(localStorage.getItem("playsHistory")));
+    }
+  }, [counter, cpuOption, playsHistory, userOption]);
 
   useEffect(() => {
     const userOpt = userOption;
@@ -68,6 +104,20 @@ function App() {
   return (
     <>
       <h1>Rock Papers Scissor</h1>
+      <section
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "16px",
+        }}
+      >
+        <h3>Statistics:</h3>
+        <p>
+          Wins: {playsHistory.wins} Loses: {playsHistory.loses} Draws:{" "}
+          {playsHistory.draws}
+        </p>
+      </section>
       {version === "" && (
         <section>
           <h3>Select version of the game</h3>
@@ -108,7 +158,7 @@ function App() {
         </section>
       )}
       {version !== "" && userOption !== "" && counter > 0 && <h2>{counter}</h2>}
-      {version !== "" && userOption !== "" && counter === 0 && (
+      {version !== "" && userOption !== "" && counter === undefined && (
         <section>
           <h3>{result}</h3>
           <div className="option-container">
