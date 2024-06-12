@@ -1,0 +1,61 @@
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  width: 80%;
+  text-align: center;
+}
+
+main {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.notes-list {
+  text-decoration: none;
+  list-style: none;
+  padding: 0px;
+  width: 100%;
+}
+
+.note-container-list {
+  margin: 4px 0px;
+  border: 2px solid transparent;
+  background-color: cornflowerblue;
+  cursor: pointer;
+}
+
+.note-container-list:hover {
+  border: 2px solid #3170e6;
+}
+
+.note-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.note-container-title {
+  margin-bottom: 16px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.note-container-content {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

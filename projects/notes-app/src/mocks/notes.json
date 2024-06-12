@@ -1,0 +1,40 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "name": "first example note",
+      "content": "bla bla blablab bla bla bla, bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla",
+      "categories": ["category1", "category2", "category"]
+    },
+    {
+      "id": 2,
+      "name": "second example note",
+      "content": "bla bla blablab bla bla bla, bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla",
+      "categories": ["category1", "category2", "category"]
+    },
+    {
+      "id": 3,
+      "name": "third example note",
+      "content": "bla bla blablab bla bla bla, bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla",
+      "categories": ["category1", "category2", "category"]
+    },
+    {
+      "id": 4,
+      "name": "fourth example note",
+      "content": "bla bla blablab bla bla bla, bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla",
+      "categories": ["category1", "category2", "category"]
+    },
+    {
+      "id": 5,
+      "name": "first example note",
+      "content": "bla bla blablab bla bla bla, bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla",
+      "categories": ["category1", "category2", "category"]
+    },
+    {
+      "id": 6,
+      "name": "fifth example note",
+      "content": "bla bla blablab bla bla bla, bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla",
+      "categories": ["category1", "category2", "category"]
+    }
+  ]
+}
