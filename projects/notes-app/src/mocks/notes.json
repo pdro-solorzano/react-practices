@@ -36,5 +36,6 @@
       "content": "bla bla blablab bla bla bla, bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla bla bla blablab bla bla bla",
       "categories": ["category1", "category2", "category"]
     }
-  ]
+  ],
+  "categories": ["category", "category1", "category2"]
 }
