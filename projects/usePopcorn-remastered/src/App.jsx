@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import PropTypes from "prop-types";
 // import { tempMovieData, tempWatchedData } from "./mocks/dataWithMovies";
 // import { func } from "prop-types";
 import { StartRating } from "./components/StartRating";
+import { useMovies } from "./useMovies";
+import { useLocalStorageState } from "./useLocalStorageState";
+import { useKey } from "./useKey";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -11,62 +14,15 @@ const average = (arr) =>
 const API_KEY = "3a3aee5b"; // f84fc31d
 
 function App() {
-  const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState("");
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
-  useEffect(() => {
-    /* fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=lol`)
-      .then((res) => res.json())
-      .then((data) => setMovies(data.Search)); */
+  const handleCloseMovie = () => {
+    setSelectedId(null);
+  };
 
-    const controller = new AbortController();
-
-    const fetchMovies = async () => {
-      try {
-        setIsLoading(true);
-        setIsError("");
-        const res = await fetch(
-          `http://www.omdbapi.com/?s=${query}&apikey=${API_KEY}`,
-          { signal: controller.signal }
-        );
-
-        if (!res.ok) {
-          throw new Error("Something went wrong while fetching movies");
-        }
-
-        const data = await res.json();
-
-        if (data.Response === "False") {
-          throw new Error("Movie not found");
-        }
-        setMovies(data.Search);
-        setIsError("");
-      } catch (err) {
-        if (err.name !== "AbortError") {
-          setIsError(err.message);
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    if (query.length < 3) {
-      setMovies([]);
-      setIsError("");
-      return;
-    }
-
-    handleCloseMovie();
-    fetchMovies();
-
-    return () => {
-      controller.abort();
-    };
-  }, [query]);
+  const { movies, isLoading, isError } = useMovies({ query });
+  const [watched, setWatched] = useLocalStorageState([], "watched");
 
   const handleSearch = (q) => {
     setQuery(q);
@@ -81,12 +37,11 @@ function App() {
     setSelectedId((currentId) => (id === currentId ? null : id));
   };
 
-  const handleCloseMovie = () => {
-    setSelectedId(null);
-  };
-
   const handleAddWatchedMovie = (movie) => {
     setWatched((currentMovies) => [...currentMovies, movie]);
+
+    // Save watched data in local storage.
+    // localStorage.setItem("watched", JSON.stringify([...watched, movie]));
   };
 
   const handleDeleteWatched = (id) => {
@@ -170,6 +125,14 @@ function Logo() {
 }
 
 function Search({ query, handleSearch }) {
+  const inputEl = useRef(null);
+
+  useKey("enter", () => {
+    if (document.activeElement === inputEl.current) return;
+    inputEl.current.focus();
+    handleSearch("");
+  });
+
   return (
     <input
       className="search"
@@ -177,6 +140,7 @@ function Search({ query, handleSearch }) {
       placeholder="Search movies..."
       value={query}
       onChange={(e) => handleSearch(e.target.value)}
+      ref={inputEl}
     />
   );
 }
@@ -241,6 +205,8 @@ function MovieDetails({
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState(0);
 
+  const countRef = useRef(0);
+
   const isWatched = watchedMovies
     .map((movie) => movie.imdbID)
     .includes(selectedId);
@@ -288,19 +254,7 @@ function MovieDetails({
     }
   }, [selectedId]);
 
-  useEffect(() => {
-    const callback = (event) => {
-      if (event.code === "Escape") {
-        onCloseMovie();
-      }
-    };
-
-    document.addEventListener("keydown", callback);
-
-    return () => {
-      document.removeEventListener("keydown", callback);
-    };
-  }, [onCloseMovie]);
+  useKey("escape", onCloseMovie);
 
   const handleAdd = () => {
     const newWatchedMovie = {
@@ -347,7 +301,10 @@ function MovieDetails({
                   <StartRating
                     maxRating={10}
                     size={24}
-                    onSetRating={setUserRating}
+                    onSetRating={(rating) => {
+                      setUserRating(rating);
+                      countRef.current++;
+                    }}
                   />
                   {userRating > 0 && (
                     <button className="btn-add" onClick={handleAdd}>
