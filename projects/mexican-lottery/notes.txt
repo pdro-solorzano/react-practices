@@ -1,0 +1,10 @@
+- Elegir entre solo cantar las cartas y jugar contra cpu
+- Darte a elegir de entre 3 cartas y generar mas en caso de que no te guste
+- Empezar a jugar una vez elegida tu cartas
+- La carta del cpu mostrarla a un costado y mas pequenia
+- cuando se de un resultado (gana pierde o empate) parar la cantada de las cartas
+- poder mostrar el historial de las cartas
+- si se esta viendo el historial, parar tambien el cantado
+- Talvez mostar instrucciones
+
+Hacer esto cuando se aprenda a manejar rutas /play /shuffle
